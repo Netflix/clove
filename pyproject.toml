@@ -1,0 +1,66 @@
+[tool.poetry]
+name = "open_clip_torch"
+version = "2.24.0"
+description = "Fork of OpenCLIP."
+authors = ["Santiago Castro <sacastro@umich.edu>"]
+readme = "README.md"
+packages = [{ include = "*", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+albumentations = "<2"
+bitsandbytes = "*"
+boto3 = "*"
+botocore = "*"
+braceexpand = "*"
+cached-path = "*"
+clip_benchmark = "*"
+datasets = "<3"
+decord = "*"
+# The following one is added here to make Ray install the spaCy model from the runtime env options.
+en-core-web-sm = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl" }
+filelock = "*"
+fsspec = "*"
+ftfy = "*"
+gdown = "*"  # For ARO datasets.
+gitignorefile = "*"
+grpcio = "*"
+hydra-core = "<1.4"
+hydra-optuna-sweeper = "*"
+hydra-ray-launcher = "*"
+huggingface_hub = "*"
+imagenetv2_pytorch = { git = "https://github.com/modestyachts/ImageNetV2_pytorch" }
+ipython = "*"
+jupyter = "*"
+matplotlib = "*"
+mteb = "*"
+neptune = "*"
+nltk = "<4"  # For ARO datasets.
+omegaconf = "*"
+pandas = "*"
+psutil = "*"
+pyinflect = "*"
+pytz = "*"
+pyyaml = "*"
+rarfile = "*"  # For HMDB51 and UCF101.
+ray = { version = "2.7.1", extras = ["default"] }
+regex = "*"
+scenegraphparser = "*"
+scikit-learn = "*"
+scipy = "*"
+seaborn = "*"
+spacy = "<4"  # For ARO datasets.
+tensorboard = "*"
+timm = "*"
+torch = "2.2.1"  # This version from PyPI supports CUDA 12.1.
+torchvision = "*"
+tqdm = "*"
+triton = "*"  # To use with bitsandbytes.
+transformers = "*"
+wandb = "*"
+webdataset = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,10 @@
+# We put this file here, so it can be used both from Hydra and from `ray job submit`.
+
+config:
+  setup_timeout_seconds: 1800
+env_vars:
+  GRPC_ENABLE_FORK_SUPPORT: "0"  # Oftentimes, runs with Ray just segfault on fork if this is not set.
+pip: requirements.txt
+py_modules:
+  - src/open_clip
+  - src/training

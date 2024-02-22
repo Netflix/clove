@@ -1,0 +1,19 @@
+{
+    "embed_dim": 256,
+    "vision_cfg": {
+        "image_size": 64,
+        "layers": [
+            2,
+            2,
+            2,
+            2
+        ],
+        "width": 64,
+        "patch_size": null
+    },
+    "text_cfg": {
+        "width": 512,
+        "heads": 8,
+        "layers": 6
+    }
+}

@@ -1,0 +1,20 @@
+# @package _global_
+defaults:
+  - /hydra/launcher/ray/init/runtime_env: main
+  - mixin_ray_pass_hf_neptune_env_vars
+  - override /hydra/launcher: ray
+  - _self_
+
+hydra:
+  launcher:
+    ray:
+      init:
+        address: null
+        num_cpus: null
+        num_gpus: null
+      remote:
+        num_cpus: null
+        num_gpus: null
+  mode: MULTIRUN
+
+kill_all_descendent_processes_at_the_end: true  # Sometimes, some processes are still alive after finishing.

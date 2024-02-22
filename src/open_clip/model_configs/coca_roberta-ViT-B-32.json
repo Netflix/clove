@@ -1,0 +1,22 @@
+{
+    "embed_dim": 512,
+    "vision_cfg": {
+        "layers": 12,
+        "width": 768,
+        "patch_size": 32,
+        "output_tokens": true
+    },
+    "text_cfg": {
+        "hf_model_name": "roberta-base",
+        "hf_proj_type": "linear",
+        "width": 768,
+        "output_tokens": true
+    },
+    "multimodal_cfg": {
+        "context_length": 63,
+        "width": 768,
+        "heads": 8,
+        "layers": 12
+    },
+    "custom_text": true
+}

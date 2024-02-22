@@ -1,0 +1,10 @@
+{
+    "embed_dim": 384,
+    "vision_cfg": {
+        "timm_model_name": "resnet18"
+    },
+    "text_cfg": {
+        "hf_model_name": "roberta-base",
+        "proj": "mlp"
+    }
+}
