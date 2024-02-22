@@ -1,0 +1,14 @@
+# @package _global_
+hydra:
+  launcher:
+    ray:
+      init:
+        runtime_env:
+          env_vars:
+            # The alternative to the following is to do `huggingface-cli login` on the Ray nodes.
+            # However, I have tried that and seems to not work.
+            # Maybe the home dir isn't synced across the machines?
+            # The machines may also be reset occasionally.
+            # Also, it's not the safest thing to save the token in the local machines as everything's shared.
+            HUGGING_FACE_HUB_TOKEN: ${oc.env:HUGGING_FACE_HUB_TOKEN}
+            NEPTUNE_API_TOKEN: ${oc.env:NEPTUNE_API_TOKEN}

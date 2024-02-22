@@ -1,0 +1,12 @@
+# Usage as an arg from the CLI: `hydra/launcher/ray/init/runtime_env=from_github`
+#
+# See https://github.com/ray-project/ray/issues/32729 if you have issues running this config file.
+
+defaults:
+  - main
+  - _self_
+
+env_vars:
+  PYTHONPATH: src
+py_modules: null
+working_dir: https://github.com/Netflix/clove/archive/refs/heads/main.zip

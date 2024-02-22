@@ -1,0 +1,19 @@
+# @package _global_
+defaults:
+  - override /hydra/sweeper: optuna
+  - _self_
+
+hydra:
+  mode: MULTIRUN
+  sweeper:
+    study_name: null
+    storage: null
+    direction: minimize
+    n_jobs: 8
+    n_trials: 16
+    sampler:
+      seed: ${seed}
+    params:
+      lr: tag(log, interval(1e-5, 1e-3))
+
+optimized_metric_name: val/clip_val_loss

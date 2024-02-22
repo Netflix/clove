@@ -1,0 +1,15 @@
+{
+    "embed_dim": 1280,
+    "vision_cfg": {
+        "layers": 48,
+        "width": 1664,
+        "head_width": 104,
+        "mlp_ratio": 4.9231,
+        "patch_size": 14
+    },
+    "text_cfg": {
+        "width": 1280,
+        "heads": 20,
+        "layers": 32
+    }
+}
