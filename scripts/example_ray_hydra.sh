@@ -4,9 +4,7 @@ NUM_GPUS=1 && NUM_CPUS_PER_GPU=12 && python -m training.hydra \
   launch_on="$RAY_CONFIG_PATH" \
   hydra.launcher.ray.remote.num_cpus="$(bc <<< $NUM_GPUS*$NUM_CPUS_PER_GPU)" \
   hydra.launcher.ray.remote.num_gpus="$NUM_GPUS" \
-  copy_codebase=True \
-  remote_sync="$LOG_DIR" \
-  report_to='[neptune,tensorboard]' \
+  report_to='[tensorboard]' \
   train_data=laion \
   warmup=2000 \
   batch_size=1024 \

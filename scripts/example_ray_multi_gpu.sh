@@ -8,9 +8,7 @@ NUM_GPUS=2 && NUM_CPUS_PER_GPU=12 && ray job submit \
   --entrypoint-num-gpus "$NUM_GPUS" \
   --entrypoint-num-cpus "$(bc <<< $NUM_GPUS*$NUM_CPUS_PER_GPU)" \
   -- OMP_NUM_THREADS="$NUM_CPUS_PER_GPU" torchrun --nproc_per_node "$NUM_GPUS" -m training \
-    --copy-codebase \
-    --remote-sync "$LOG_DIR" \
-    --report-to neptune tensorboard \
+    --report-to tensorboard \
     --train-data laion \
     --warmup 2000 \
     --batch-size 1024 \

@@ -9,9 +9,7 @@ NUM_GPUS=1 && NUM_CPUS_PER_GPU=12 && ray job submit \
   --entrypoint-num-cpus "$(bc <<< $NUM_GPUS*$NUM_CPUS_PER_GPU)" \
   --no-wait \
   -- python -m training \
-    --copy-codebase \
-    --remote-sync "$LOG_DIR" \
-    --report-to neptune tensorboard \
+    --report-to tensorboard \
     --train-data laion \
     --warmup 2000 \
     --batch-size 1024 \

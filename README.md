@@ -16,7 +16,8 @@ performance on standard vision-language tasks.
 
 TODO: some example figure showing what our method enables?
 
-This codebase is largely based on [OpenCLIP's](https://github.com/mlfoundations/open_clip) and is up-to-date until
+This codebase is largely based on [OpenCLIP's](https://github.com/mlfoundations/open_clip),
+containing its changes until (and including)
 [the commit `73fa7f0`](https://github.com/mlfoundations/open_clip/commit/73fa7f0).
 We are specially thankful to the authors of OpenCLIP for their work.
 
@@ -30,15 +31,15 @@ PyTorch.
 With Python 3.10 or later, clone this repo and run:
 
 ```bash
-export PYTHONPATH=src
 pip install -e .
+export PYTHONPATH=src
 ```
 
 ### HMDB51 and UCF101 Evaluation
 
 You need to have [a rarfile backend](https://github.com/markokr/rarfile) installed (e.g., `unrar`).
 
-For UCF101, given that [UCF's website is that the server's certificate chain is
+For UCF101, given that [UCF's website server's certificate chain is
 incomplete](https://www.ssllabs.com/ssltest/analyze.html?d=www.crcv.ucf.edu), you need to run the following
 (note that this command runs two sudo commands to include an intermediate Certificate Authority certificate to the 
 system):
@@ -82,8 +83,36 @@ TODO
 
 To reproduce our training (fine-tuning) procedure, you need to follow these steps:
 
+1. [Download LAION-COCO in the webdataset
+    format](https://github.com/rom1504/img2dataset/blob/main/dataset_examples/laion-coco.md).
+2. Set its path in `_DATASET_SHORT_NAMES["laion-coco"]` in [`src/training/params.py`](src/training/params.py).
+3. Run:
+
 ```bash
-TODO
+--train-data
+laion-coco
+--train-num-samples
+10_000_000
+--dataset-resampled
+--warmup
+2000
+--batch-size
+256
+--lr
+1e-6
+--wd
+0.1
+--epochs
+100
+--workers
+24
+--model
+ViT-B-32
+--pretrained
+openai
+--replace-with-extra-caption
+--add-random-text-hard-negatives
+replace
 ```
 
 See more examples of training code under [`scripts/`](scripts).

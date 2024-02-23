@@ -1,9 +1,12 @@
 [tool.poetry]
 name = "open_clip_torch"
 version = "2.24.0"
-description = "Fork of OpenCLIP."
+description = "CLoVe"
 authors = ["Santiago Castro <sacastro@umich.edu>"]
 readme = "README.md"
+homepage = "https://github.com/Netflix/clove"
+repository = "https://github.com/Netflix/clove"
+license = "MIT"
 packages = [{ include = "*", from = "src" }]
 
 [tool.poetry.dependencies]

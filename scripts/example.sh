@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
 python -m training \
-  --copy-codebase \
-  --remote-sync "$LOG_DIR" \
-  --report-to neptune tensorboard \
+  --report-to tensorboard \
   --train-data laion \
   --warmup 2000 \
   --batch-size 1024 \
