@@ -92,7 +92,8 @@ python -m training --help
 ## Reproducing our Training Procedure
 
 To reproduce our training (fine-tuning) procedure, you would need a machine with 8x GPUs with enough memory
-(e.g., A10, A100, or A40) and you need to follow these steps:
+(e.g., A10, A100, or A40; you may manage to reproduce similar results by adjusting some parameters)
+and you need to follow these steps:
 
 1. [Download LAION-COCO in the webdataset
     format](https://github.com/rom1504/img2dataset/blob/main/dataset_examples/laion-coco.md).
