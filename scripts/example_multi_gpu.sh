@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-OMP_NUM_THREADS=12 torchrun --nproc_per_node 2 -m training \
-  --report-to tensorboard \
-  --train-data laion \
+OMP_NUM_THREADS=24 torchrun --nproc_per_node 8 -m training \
+  --train-data laion-coco \
+  --train-num-samples 10_000_000 \
+  --dataset-resampled \
   --warmup 2000 \
-  --batch-size 1024 \
-  --lr 1e-4 \
+  --batch-size 256 \
+  --lr 1e-6 \
   --wd 0.1 \
-  --epochs 32 \
-  --workers 12 \
+  --epochs 100 \
+  --workers 24 \
   --model ViT-B-32 \
-  --pretrained-image \
-  --lock-text \
-  --lock-text-freeze-layer-norm \
-  --resume "$LOG_DIR/name/checkpoints/epoch_9.pt"
+  --pretrained openai \
+  --replace-with-extra-caption \
+  --add-random-text-hard-negatives replace

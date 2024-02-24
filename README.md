@@ -81,7 +81,8 @@ TODO
 
 ## Reproducing our Training Procedure
 
-To reproduce our training (fine-tuning) procedure, you need to follow these steps:
+To reproduce our training (fine-tuning) procedure, you would need a machine with 8x GPUs with enough memory
+(e.g., A10, A100, or A40) and you need to follow these steps:
 
 1. [Download LAION-COCO in the webdataset
     format](https://github.com/rom1504/img2dataset/blob/main/dataset_examples/laion-coco.md).
@@ -89,35 +90,13 @@ To reproduce our training (fine-tuning) procedure, you need to follow these step
 3. Run:
 
 ```bash
---train-data
-laion-coco
---train-num-samples
-10_000_000
---dataset-resampled
---warmup
-2000
---batch-size
-256
---lr
-1e-6
---wd
-0.1
---epochs
-100
---workers
-24
---model
-ViT-B-32
---pretrained
-openai
---replace-with-extra-caption
---add-random-text-hard-negatives
-replace
+./scripts/example_multi_gpu.sh
 ```
 
-See more examples of training code under [`scripts/`](scripts).
+If your machine has fewer than 8 GPUs or doesn't adapt well to the script, review it and change it accordingly.
+See more training code examples under [`scripts/`](scripts).
 
-See all the available program options by running:
+You can list all the available program options by running:
 
 ```bash
 python -m training --help
@@ -127,7 +106,7 @@ python -m training --help
 
 TODO
 
-See all the available program options by running:
+You can list all the available program options by running:
 
 ```bash
 python -m training --help
