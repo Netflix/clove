@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 OMP_NUM_THREADS=24 torchrun --nproc_per_node 8 -m training \
+  --report-to tensorboard \
   --train-data laion-coco \
   --train-num-samples 10_000_000 \
   --dataset-resampled \

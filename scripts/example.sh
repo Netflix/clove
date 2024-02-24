@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 python -m training \
+  --report-to tensorboard \
   --train-data laion-coco \
   --train-num-samples 10_000_000 \
   --dataset-resampled \

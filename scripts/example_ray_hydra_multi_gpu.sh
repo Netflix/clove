@@ -1,19 +1,20 @@
 #!/usr/bin/env bash
 
-NUM_GPUS=2 && NUM_CPUS_PER_GPU=12 && python -m training.hydra \
+NUM_GPUS=8 && NUM_CPUS_PER_GPU=24 && python -m training.hydra \
   launch_on="$RAY_CONFIG_PATH" \
   hydra.launcher.ray.remote.num_cpus="$(bc <<< $NUM_GPUS*$NUM_CPUS_PER_GPU)" \
   hydra.launcher.ray.remote.num_gpus="$NUM_GPUS" \
   report_to='[tensorboard]' \
-  train_data=laion \
+  train_data=laion-coco \
+  train_num_samples=10_000_000 \
+  dataset_resampled=True \
   warmup=2000 \
-  batch_size=1024 \
-  lr=1e-4 \
+  batch_size=256 \
+  lr=1e-6 \
   wd=0.1 \
-  epochs=32 \
+  epochs=100 \
   workers="$NUM_CPUS_PER_GPU" \
-  model=ViT-B-32 \
-  pretrained_image=True \
-  lock_text=True \
-  lock_text_freeze_layer_norm=True \
-  resume="$LOG_DIR/name/checkpoints/epoch_9.pt"
+  model=ViT_B_32 \
+  pretrained=openai \
+  replace_with_extra_caption=True \
+  add_random_text_hard_negatives replace

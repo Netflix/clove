@@ -79,6 +79,16 @@ If you want to use the pre-trained model, do:
 TODO
 ```
 
+## Evaluating a Pre-Trained Model
+
+TODO
+
+You can list all the available program options by running:
+
+```bash
+python -m training --help
+````
+
 ## Reproducing our Training Procedure
 
 To reproduce our training (fine-tuning) procedure, you would need a machine with 8x GPUs with enough memory
@@ -102,16 +112,6 @@ You can list all the available program options by running:
 python -m training --help
 ````
 
-## Evaluating a Pre-Trained Model
-
-TODO
-
-You can list all the available program options by running:
-
-```bash
-python -m training --help
-````
-
 ## Citation
 
 ```bibtex
@@ -126,7 +126,8 @@ TODO
 TODO:
 
 * arxiv link
-* training and eval instructions
+* how to use the pre-trained models
+* eval instructions
 * citation
 * upload the pretrained model
 * replace `clove_pretrained_path`
