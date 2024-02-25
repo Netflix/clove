@@ -32,7 +32,7 @@ With Python 3.10 or later, clone this repo and run:
 
 ```bash
 pip install -e .
-export PYTHONPATH=src
+# export PYTHONPATH=src  # I think it's not necessary.
 ```
 
 ### HMDB51 and UCF101 Evaluation
