@@ -75,13 +75,40 @@ After this, see the example files under [`scripts/`](scripts), such as [`example
 
 If you want to use the pre-trained model, do:
 
-```bash
-TODO
+```python
+import torch
+from PIL import Image
+import open_clip
+
+model, _, preprocess = open_clip.create_model_and_transforms("ViT-B-32", pretrained="openai")
+tokenizer = open_clip.get_tokenizer("ViT-B-32")
+
+model.eval()
+
+# TODO: do patching.
+
+image = preprocess(Image.open("CLIP.png")).unsqueeze(0)
+text = tokenizer(["a diagram", "a dog", "a cat"])
+
+with torch.inference_mode(), torch.cuda.amp.autocast():
+    output = model(image)
+    image_features, text_features = output["image_features"], output["text_features"]
+
+    print("Label probs:", (image_features @ text_features.T).softmax(dim=-1))  # Prints `[[1., 0., 0.]]`.
 ```
 
 ## Evaluating a Pre-Trained Model
 
-TODO
+TODO:
+
+```bash
+# TODO: add the cp/ benchmarks.
+python -m training \
+  --eval-benchmarks aro color didemo hmdb51 imagenet-v2 imagenet-val msrvtt sts sugar-crepe svo-probes ucf101 val winoground youcook2 \
+  --model ViT-B-32 \
+  --pretrained openai \
+  ...
+```
 
 You can list all the available program options by running:
 
@@ -112,6 +139,8 @@ You can list all the available program options by running:
 ```bash
 python -m training --help
 ````
+
+Also, see [OpenCLIP's repo](https://github.com/mlfoundations/open_clip) for more details on how to train models.
 
 ## Citation
 
