@@ -30,7 +30,7 @@ With Python 3.10 or later, clone this repo and run:
 
 ```bash
 pip install -e .
-# export PYTHONPATH=src  # I think it's not necessary.
+# export PYTHONPATH=src  # TODO: I think it's not necessary.
 ```
 
 ### HMDB51 and UCF101 Evaluation
@@ -169,6 +169,7 @@ Also, see [OpenCLIP's repo](https://github.com/mlfoundations/open_clip) for more
 
 TODO:
 
-* upload the pretrained model and replace the occurrences of its path in the code
+* change the example code to be more compositionality-specific
 * further test the setup and instructions
 * add a figure at the beginning
+* upload the pretrained model and replace the occurrences of its path in the code
