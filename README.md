@@ -99,15 +99,17 @@ with torch.inference_mode(), torch.cuda.amp.autocast():
 
 ## Evaluating a Pre-Trained Model
 
-TODO:
+To evaluate our model on all the benchmarks from the paper, run:
 
 ```bash
-# TODO: add the cp/ benchmarks.
 python -m training \
-  --eval-benchmarks aro color didemo hmdb51 imagenet-v2 imagenet-val msrvtt sts sugar-crepe svo-probes ucf101 val winoground youcook2 \
+  --eval-benchmarks aro color didemo hmdb51 imagenet-v2 imagenet-val msrvtt sts sugar-crepe svo-probes ucf101 val \
+  winoground youcook2 cb/wds/cars cb/wds/vtab/cifar10 cb/wds/vtab/cifar100 cb/wds/mnist \
+  cb/wds/vtab/eurosat cb/wds/vtab/flowers cb/wds/vtab/dtd \
   --model ViT-B-32 \
   --pretrained openai \
-  ...
+  --wise-ft "$CLOVE_PATH" \
+  --wise-ft-weight-for-2 0.6
 ```
 
 You can list all the available program options by running:
