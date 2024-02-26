@@ -163,4 +163,4 @@ TODO:
 * citation
 * upload the pretrained model
 * replace `clove_pretrained_path`
-* test setup and instructions
+* further test the setup and instructions
