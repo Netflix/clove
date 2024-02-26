@@ -14,8 +14,6 @@ and [Rada Mihalcea](https://web.eecs.umich.edu/~mihalcea/).
 [CLIP](https://openai.com/research/clip)-like models to encode compositional language while keeping or improving the 
 performance on standard vision-language tasks.
 
-TODO: some example figure showing what our method enables?
-
 This codebase is largely based on [OpenCLIP's](https://github.com/mlfoundations/open_clip),
 containing its changes until (and including)
 [the commit `73fa7f0`](https://github.com/mlfoundations/open_clip/commit/73fa7f0).
@@ -78,14 +76,18 @@ If you want to use the pre-trained model, do:
 ```python
 import torch
 from PIL import Image
+
 import open_clip
+from training.file_utils import pt_load
+from training.utils import get_state_dict, patch_model
 
 model, _, preprocess = open_clip.create_model_and_transforms("ViT-B-32", pretrained="openai")
 tokenizer = open_clip.get_tokenizer("ViT-B-32")
 
 model.eval()
 
-# TODO: do patching.
+patch_model(model, get_state_dict(pt_load("FINETUNED_MODEL_PATH"), model=model),
+            weight_for_state_dict=0.6)
 
 image = preprocess(Image.open("CLIP.png")).unsqueeze(0)
 text = tokenizer(["a diagram", "a dog", "a cat"])
@@ -147,7 +149,17 @@ Also, see [OpenCLIP's repo](https://github.com/mlfoundations/open_clip) for more
 ## Citation
 
 ```bibtex
-TODO
+@misc{clove,
+  title={{CLoVe}: Encoding Compositional Language in Contrastive Vision-Language Models},
+  author={Santiago Castro and Amir Ziai and Avneesh Saluja and Zhuoning Yuan and Rada Mihalcea},
+  howpublished={arXiv:2402.15021},
+  month=feb,
+  year={2024},
+  url={https://arxiv.org/abs/2402.15021},
+  eprint={2402.15021},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV}
+}
 ```
 
 **If you use our code, please consider also
@@ -157,9 +169,6 @@ TODO
 
 TODO:
 
-* how to use the pre-trained models
-* eval instructions
-* citation
-* upload the pretrained model
-* replace `clove_pretrained_path`
+* upload the pretrained model and replace the occurrences of its path in the code
 * further test the setup and instructions
+* add a figure at the beginning
