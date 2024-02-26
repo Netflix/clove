@@ -2,7 +2,7 @@
 
 This repo contains the code and pre-trained models that accompanies our paper:
 
-[CLoVe: Encoding Compositional Language in Contrastive Vision-Language Models](https://arxiv.org/abs/TODO)
+[CLoVe: Encoding Compositional Language in Contrastive Vision-Language Models](https://arxiv.org/abs/2402.15021)
 
 [Santiago Castro](https://santi.uy/),
 [Amir Ziai](https://linkedin.com/in/amirziai),
@@ -157,7 +157,6 @@ TODO
 
 TODO:
 
-* arxiv link
 * how to use the pre-trained models
 * eval instructions
 * citation
