@@ -9,6 +9,7 @@ import torch.nn.functional as F
 from sklearn.metrics import balanced_accuracy_score
 from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
+from webdataset import WebLoader
 
 from open_clip import HFTokenizer, ImageTextModel, get_autocast, get_input_dtype
 from open_clip.utils import slugify
