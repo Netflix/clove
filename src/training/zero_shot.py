@@ -107,9 +107,11 @@ def _maybe_compute_generative_loss(model_out: Mapping[str, torch.Tensor]) -> tor
         return None
 
 
-def run_retrieval_eval(model: ImageTextModel, data: DataLoader, args: argparse.Namespace, tokenizer: HFTokenizer,
-                       dataset_name: str | None = None, **__) -> Mapping[str, float]:
-    name = dataset_name or getattr(data.dataset, "name", type(data.dataset).__name__)
+def run_retrieval_eval(model: ImageTextModel, data: DataLoader | WebLoader, args: argparse.Namespace,
+                       tokenizer: HFTokenizer, dataset_name: str | None = None, **__) -> Mapping[str, float]:
+    name = (dataset_name
+            or getattr(data, "name", None)
+            or getattr(getattr(data, "dataset", None), "name", type(data.dataset).__name__))
 
     autocast = get_autocast(args.precision)
     input_dtype = get_input_dtype(args.precision)
@@ -122,7 +124,7 @@ def run_retrieval_eval(model: ImageTextModel, data: DataLoader, args: argparse.N
         total = None
 
     with torch.inference_mode(), tqdm(unit=" samples", total=total,
-                                      desc=f"Running {name} eval" if name else "Validating") as p_bar:
+                                      desc=f"Running {name} eval" if name and name != "val" else "Validating") as p_bar:
         all_image_feature_list, all_text_feature_list = [], []
 
         cumulative_loss = torch.zeros((), device=args.device)

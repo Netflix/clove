@@ -586,7 +586,9 @@ def _get_dataset_fn(data_path: str, dataset_type: Literal["auto", "csv", "synthe
 
 @_eval_dataset("val")
 def get_val(args: argparse.Namespace, transform: Transform, tokenizer: HFTokenizer) -> DataInfo:
-    return _get_dataset_fn(args.val_data, args.dataset_type)(args, transform, tokenizer, is_train=False)
+    data_info = _get_dataset_fn(args.val_data, args.dataset_type)(args, transform, tokenizer, is_train=False)
+    data_info.data_loader.name = "val"
+    return data_info
 
 
 def get_data(args: argparse.Namespace, train_transform: Transform, val_transform: Transform, tokenizer: HFTokenizer,
