@@ -82,13 +82,12 @@ from open_clip import create_model_and_preprocessing
 from training.file_utils import pt_load
 from training.utils import get_state_dict, patch_model
 
-model, _, transform, tokenizer = create_model_and_preprocessing("ViT-B-32",
-                                                                pretrained="openai")
+model, _, transform, tokenizer = create_model_and_preprocessing("ViT-B-32", "openai")
 model.eval()
 
 URL = ("https://github.com/Netflix/clove/releases/download/pretrained/"
        "clove_without_patching.pt")
-patch_model(model, get_state_dict(pt_load(URL), model=model), weight_for_state_dict=0.6)
+patch_model(model, get_state_dict(pt_load(URL), model), weight_for_state_dict=0.6)
 
 image_path = cached_path(
     "https://github.com/mlfoundations/open_clip/blob/main/docs/CLIP.png?raw=true")
