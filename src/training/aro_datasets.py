@@ -23,7 +23,7 @@ from open_clip.transform import Transform
 from open_clip.utils import maybe_nltk_download
 from training.s3_utils import s3_sync
 
-CACHE_DIR = os.getenv("CACHE_DIR", "/mnt/.cache")
+CACHE_DIR = os.getenv("CACHE_DIR", "~/.cache")
 
 NLP = spacy.load("en_core_web_sm", enable=["tok2vec", "tagger"])  # If "tok2vec" is not specified, all tags are NN.
 

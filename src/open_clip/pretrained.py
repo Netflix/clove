@@ -24,7 +24,7 @@ except ImportError:
     _has_hf_hub = False
 
 
-CACHE_DIR = os.getenv("CACHE_DIR", "/mnt/.cache")
+CACHE_DIR = os.getenv("CACHE_DIR", "~/.cache")
 
 
 def _pcfg(url: str | None = None, hf_hub: str | None = None, **kwargs) -> Mapping[str, Any]:
