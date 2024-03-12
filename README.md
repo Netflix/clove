@@ -1,6 +1,6 @@
 # CLoVe
 
-This repo contains the code and pre-trained models that accompanies our paper:
+This repo contains the code and pre-trained models that we released along with our paper:
 
 [CLoVe: Encoding Compositional Language in Contrastive Vision-Language Models](https://arxiv.org/abs/2402.15021)
 
