@@ -178,3 +178,6 @@ Also, see [OpenCLIP's repo](https://github.com/mlfoundations/open_clip) for more
 * add a repo description and tags
 * upload an already-patched model
   * maybe create a table with the available pre-trained weights and reference performance
+* provide pre-trained weights for larger models
+* make it easy to install as a library
+* incorporate the weights in open_clip
