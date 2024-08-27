@@ -62,7 +62,7 @@ class DecordVideoReader(VideoReader):
         times = (torch.from_numpy(self.video_reader.get_frame_timestamp(range(len(self)))).mean(dim=-1)
                  if self.video_reader else torch.zeros(1))
         indices = torch.searchsorted(times, time)
-        return indices.where((indices == 0) | (times[indices] - time <= time - times[indices - 1]), indices - 1)
+        return indices.where((indices == 0) | (times[indices - 1] - time <= time - times[indices - 1]), indices - 1)
 
     def get_avg_fps(self) -> float:
         return self.video_reader.get_avg_fps() if self.video_reader else 1
