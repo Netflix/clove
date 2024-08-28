@@ -20,7 +20,9 @@ class VideoReader(ABC):
 
     @abstractmethod
     def time_to_indices(self, time: float) -> torch.Tensor:
-        """The input can be a single value or a sequence of values."""
+        """Returns the index of the closest frame to the input `time`. The input is expressed in seconds and can be a
+        scalar or a 1-D tensor. The output has the same shape as the input.
+        """
         raise NotImplementedError
 
     @abstractmethod
@@ -58,11 +60,31 @@ class DecordVideoReader(VideoReader):
     def __len__(self) -> int:
         return len(self.video_reader) if self.video_reader else 1
 
-    def time_to_indices(self, time: float) -> torch.Tensor:
-        times = (torch.from_numpy(self.video_reader.get_frame_timestamp(range(len(self)))).mean(dim=-1)
-                 if self.video_reader else torch.zeros(1))
-        indices = torch.searchsorted(times, time)
-        return indices.where((indices == 0) | (times[indices] - time <= time - times[indices - 1]), indices - 1)
+    def time_to_indices(self, time: float | torch.Tensor, end_time_tolerance: float = 1) -> torch.Tensor:
+        # Decord provides us with the start and end of each frame. We could simply check where `time` falls in.
+        # However, it gets more complex, as `time` can possibly fall in between two frames.
+        # The easiest approach I've found is to take the mean, supposing the frame is instantaneous,
+        # to then the closest frame index.
+        available_times = (torch.from_numpy(self.video_reader.get_frame_timestamp(range(len(self)))).mean(dim=-1)
+                           if self.video_reader else torch.zeros(1))
+        # `available_times` is the mean of the start and end time for each frame, sorted.
+
+        if (time > available_times[-1] + end_time_tolerance).any():
+            logging.warning(f"The sought time(s) {time}s is significantly larger than the last frame time of"
+                            f" {available_times[-1]}s.")
+
+        # A batched binary search is the fastest way I could think of to do this.
+        indices = torch.searchsorted(available_times, time)
+        # `indices` indicates where `time` should be inserted in `available_times` to maintain the order.
+        # Thus, `available_times[indices - 1] < time <= available_times[indices]`,
+        # as long as `0 < indices < len(available_times)`.
+
+        indices.clamp_(max=len(available_times) - 1)
+
+        # Now, we have to check if `time` is closer to the previous or the next frame.
+        # For each element in `time`, we return the closest time between that of `indices` and `indices - 1`.
+        return indices.where((indices == 0) | (available_times[indices] - time <= time - available_times[indices - 1]),
+                             indices - 1)
 
     def get_avg_fps(self) -> float:
         return self.video_reader.get_avg_fps() if self.video_reader else 1
