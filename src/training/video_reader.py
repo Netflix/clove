@@ -19,7 +19,7 @@ class VideoReader(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def time_to_indices(self, time: float) -> torch.Tensor:
+    def time_to_indices(self, time: float | torch.Tensor) -> torch.Tensor:
         """Returns the index of the closest frame to the input `time`. The input is expressed in seconds and can be a
         scalar or a 1-D tensor. The output has the same shape as the input.
         """
